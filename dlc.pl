@@ -106,11 +106,7 @@ while (<IN>)
 
   # Strip off the beginnings and endings
   s/^.*http/http/;
-# TPM Debugging
-  print $_;
   s/\".*//;
-# TPM Debugging
-  print $_;
 
   #Save the url
   $url = $_;
@@ -120,7 +116,7 @@ while (<IN>)
 # Append to the target file
 print OUT "<img src=\"$url\"><p>\n";
 
-# TPM Until I get this working, just open it in another tab
+# TPM If the file parse didn't work, just open the original url in it's own tab
 system("$browserCmd $url");
 
 ################################################################################
