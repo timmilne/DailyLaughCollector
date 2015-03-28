@@ -56,12 +56,12 @@ system("$browserCmd \"http://itgt.target.com\"");
 my $numDays = (scalar(@ARGV)>0 && $ARGV[0] < 0)?($ARGV[0]):0;
 
 # Do this for the desired number of days.
-for (my $curDay = 0; $curDay >= $numDays; $curDay--)
+for (my $curDay = $numDays; $curDay <= 0; $curDay++)
 {
 
 # Open the processing files
 my $tmpfile = "tmp.html";
-my $htmlfile = "html.html\n";
+my $htmlfile = "html$curDay.html\n";
 open (OUT, ">$htmlfile") || die "Can't open: $htmlfile";
 
 # Set the day (with optional arguments)
