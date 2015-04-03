@@ -117,7 +117,7 @@ while (<IN>)
 print OUT "<img src=\"$url\"><p>\n";
 
 # TPM If the file parse didn't work, just open the original url in it's own tab
-system("$browserCmd $url");
+#system("$browserCmd $url");
 
 ################################################################################
 # Calvin and Hobbes
