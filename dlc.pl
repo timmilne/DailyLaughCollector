@@ -16,7 +16,7 @@
 #
 # NOTE: This uses the LWP::UserAgent::Determined perl module available from
 #       CPAN.  LWP is preinstalled on the Mac, so you may not need to install
-#	this.  If so, then you will need to rewrite these instructions leveaging
+#	this.  If so, then you will need to rewrite these instructions leveraging
 #	cpan:
 #
 #          sudo cpan LWP::UserAgent::Determined
