@@ -268,8 +268,6 @@ system("$browserCmd $htmlfile");
 # Check Woot, BeDeal and slickdeals...
 system("$browserCmd http://woot.com");
 #sleep(3);
-system("$browserCmd http://bedeals.com");
-#sleep(3);
 system("$browserCmd http://www.slickdeals.net");
 #sleep(3)
 system("$browserCmd http://www.facebook.com");
