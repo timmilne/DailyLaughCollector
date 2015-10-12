@@ -64,12 +64,12 @@ my $tmpfile = "tmp.html";
 my $htmlfile = "html$curDay.html\n";
 open (OUT, ">$htmlfile") || die "Can't open: $htmlfile";
 
-# Set the day (with optional arguments)
-my $day = (scalar(@ARGV)>0 && $ARGV[0] < 0)?
+# Set the date (with optional arguments)
+my $date = (scalar(@ARGV)>0 && $ARGV[0] < 0)?
 	strftime "%Y%m%d", localtime((time + $curDay*86400)):
 	(scalar(@ARGV)>0)?$ARGV[0]:strftime "%Y%m%d", localtime;
 # The new Dilbert website requires some adaptations
-my $altDay = (scalar(@ARGV)>0 && $ARGV[0] < 0)?
+my $altDate = (scalar(@ARGV)>0 && $ARGV[0] < 0)?
 	strftime "%Y-%m-%d", localtime((time + $curDay*86400)):
 	(scalar(@ARGV)>0)?$ARGV[0]:strftime "%Y-%m-%d", localtime;
 
@@ -87,7 +87,7 @@ print OUT "<HTML><body>";
 print OUT "<strong><font face=\"arial\">Dilbert</strong><br>";
 
 # Grab the website
-my $url = "http:\/\/dilbert.com\/strip\/".$altDay;
+my $url = "http:\/\/dilbert.com\/strip\/".$altDate;
 
 print "Getting Dilbert...\n";
 # TPM This worked pretty slick, sending the response straight to a content file
@@ -123,27 +123,99 @@ print OUT "<img src=\"$url\"><p>\n";
 # Calvin and Hobbes
 ################################################################################
 print OUT "<strong><font face=\"arial\">Calvin and Hobbes</strong><br>";
-my $today = substr($day,2);
-my $year = substr($day,0,4);
+
+my $day = substr($date,6);
+my $month = substr($date,4,2);
+my $year = substr($date,0,4);
+
+# Grab the website
+my $url = "http:\/\/www.gocomics.com\/calvinandhobbes\/".$year."\/".$month."\/".$day;
 
 print "Getting Calvin and Hobbes...\n";
-$url = "http:\/\/images.ucomics.com\/comics\/ch\/$year\/ch$today.gif";
+# TPM This worked pretty slick, sending the response straight to a content file
+# Alas, the bug remained, and the response is truncated...
+#$response = $browser->get($url);
+$response = $browser->get($url,":content_file"=>$tmpfile);
+die $response->error_as_HTML if (!$response->is_success);
+
+# Reopen the file for reading
+open (IN, "$tmpfile") || die "Can't open: $tmpfile";
+
+while (<IN>)
+{
+  # Is this a line we are interested in?
+  next if (!/assets.amuniversal/);
+
+  # Strip off the beginnings and endings
+  s/^.*http/http/;
+  s/\".*//;
+
+  #Save the url
+  $url = $_;
+  last;
+}
 
 # Append to the target file
 print OUT "<img src=\"$url\"><p>\n";
+
+# Old way (breaks on Sunday)
+#my $day = substr($date,2);
+#my $year = substr($date,0,4);
+
+#print "Getting Calvin and Hobbes...\n";
+#$url = "http:\/\/images.ucomics.com\/comics\/ch\/$year\/ch$day.gif";
+
+# Append to the target file
+#print OUT "<img src=\"$url\"><p>\n";
 
 ################################################################################
 # Garfield
 ################################################################################
 print OUT "<strong><font face=\"arial\">Garfield</strong><br>";
-my $today = substr($day,2);
-my $year = substr($day,0,4);
+
+my $day = substr($date,6);
+my $month = substr($date,4,2);
+my $year = substr($date,0,4);
+
+# Grab the website
+my $url = "http:\/\/www.gocomics.com\/garfield\/".$year."\/".$month."\/".$day;
 
 print "Getting Garfield...\n";
-$url = "http:\/\/images.ucomics.com\/comics\/ga\/$year\/ga$today.gif";
+# TPM This worked pretty slick, sending the response straight to a content file
+# Alas, the bug remained, and the response is truncated...
+#$response = $browser->get($url);
+$response = $browser->get($url,":content_file"=>$tmpfile);
+die $response->error_as_HTML if (!$response->is_success);
+
+# Reopen the file for reading
+open (IN, "$tmpfile") || die "Can't open: $tmpfile";
+
+while (<IN>)
+{
+  # Is this a line we are interested in?
+  next if (!/assets.amuniversal/);
+
+  # Strip off the beginnings and endings
+  s/^.*http/http/;
+  s/\".*//;
+
+  #Save the url
+  $url = $_;
+  last;
+}
 
 # Append to the target file
 print OUT "<img src=\"$url\"><p>\n";
+
+# Old way (breaks on Sunday)
+#my $day = substr($date,2);
+#my $year = substr($date,0,4);
+
+#print "Getting Garfield...\n";
+#$url = "http:\/\/images.ucomics.com\/comics\/ga\/$year\/ga$day.gif";
+
+# Append to the target file
+#print OUT "<img src=\"$url\"><p>\n";
 
 ################################################################################
 # User Friendly
@@ -151,7 +223,7 @@ print OUT "<img src=\"$url\"><p>\n";
 print OUT "<strong><font face=\"arial\">User Friendly</strong><br>";
 
 # Grab the web page
-$url = "http://ars.userfriendly.org/cartoons/?id=$day";
+$url = "http://ars.userfriendly.org/cartoons/?id=$date";
 
 print "Getting User Friendly...\n";
 # TPM This worked pretty slick, sending the response straight to a content file
