@@ -6,7 +6,7 @@ with CPAN:
 
 http://triopter.com/archive/how-to-install-perl-modules-on-mac-os-x-in-4-easy-steps/
 
-Ran that, updated CPAN, then ran
+Note: I only had to do steps 1.5, 3, and 4, and for 4 I ran:
 
 $ sudo perl -MCPAN -e 'install Mozilla::CA'
 
