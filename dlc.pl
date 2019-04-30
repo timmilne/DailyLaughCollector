@@ -249,37 +249,37 @@ print OUT "<img src=\"$url\"><p>\n";
 ################################################################################
 # User Friendly
 ################################################################################
-print OUT "<strong><font face=\"arial\">User Friendly</strong><br>";
+#print OUT "<strong><font face=\"arial\">User Friendly</strong><br>";
 
 # Grab the web page
-$url = "http://ars.userfriendly.org/cartoons/?id=$date";
+#$url = "http://ars.userfriendly.org/cartoons/?id=$date";
 
-print "Getting User Friendly...\n";
+#print "Getting User Friendly...\n";
 # TPM This worked pretty slick, sending the response straight to a content file
 # Alas, the bug remained, and the response is truncated...
 #$response = $browser->get($url);
-$response = $browser->get($url,":content_file"=>$tmpfile);
-die $response->error_as_HTML if (!$response->is_success);
+#$response = $browser->get($url,":content_file"=>$tmpfile);
+#die $response->error_as_HTML if (!$response->is_success);
 
 # Reopen the file for reading
-open (IN, "$tmpfile") || die "Can't open: $tmpfile";
+#open (IN, "$tmpfile") || die "Can't open: $tmpfile";
 
-while (<IN>)
-{
+#while (<IN>)
+#{
   # Is this a line we are interested in?
-  next if (!/<a href="\/cartoons/);
+  #next if (!/<a href="\/cartoons/);
 
   # Strip off the beginnings and endings
-  s/^.*src="//;
-  s/gif.*/gif/;
+  #s/^.*src="//;
+  #s/gif.*/gif/;
 
   # Save the url
-  $url = $_;
-  last;
-}
+  #$url = $_;
+  #last;
+#}
 
 # Append to the target file
-print OUT "<img src=\"$url\"><p>\n";
+#print OUT "<img src=\"$url\"><p>\n";
 
 ################################################################################
 # xkcd
