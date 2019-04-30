@@ -12,12 +12,15 @@
 #
 # Usage: dlc [date]
 #
+# TPM 1/29/15
+#
 # Mac OS X version - but includes code that should enable it on all platforms
+#
+# TPM 6/1/18
 #
 # NOTE: This uses the LWP::UserAgent::Determined perl module available from
 #       CPAN.  LWP is preinstalled on the Mac, so you may not need to install
-#	this.  If so, then you will need to rewrite these instructions leveraging
-#	cpan:
+#	this.  If so:
 #
 #          sudo cpan LWP::UserAgent::Determined
 #
@@ -31,7 +34,33 @@
 #
 #	And then all that was missing was Shell...
 #
-# TPM 1/29/15
+# TPM 4/30/19
+#
+# NOTE: UserAgent::Determined is preinstalled, but Mac OSX now needs a Mozilla package.
+#	Here's how to do it:
+#
+#	http://triopter.com/archive/how-to-install-perl-modules-on-mac-os-x-in-4-easy-steps/
+#
+#	I only had to do steps 1.5, 3, and 4
+#
+#	1.5 - Install Command Line Tools (Recent XCode)
+#
+#       	Done as part of the XCode setup from Self Service
+#
+#	3 - Upgrade CPAN
+#
+#       	Before beggining, I disconnected from Cisco AnyConnect before doing this to
+#		have direct access to mirror sites
+#
+#	        $ sudo perl -MCPAN -e 'install Bundle::CPAN'
+#
+#	        Accepted all defaults and chose local::lib when prompted
+#
+#	        Takes a while to download and compile everything
+#
+#	5 - Install your modules
+#		
+#		$ sudo perl -MCPAN -e 'install Mozilla::CA'
 #
 
 use strict;
