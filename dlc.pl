@@ -79,7 +79,7 @@ else {
 
 # Open a new window for this
 # Having problems if no window open, so open one first...
-system("$browserCmd \"http://itgt.target.com\"");
+system("$browserCmd \"https://targetonline.sharepoint.com/sites/insideTGT\"");
 
 # Get how many days to fetch
 my $numDays = (scalar(@ARGV)>0 && $ARGV[0] < 0)?($ARGV[0]):0;
