@@ -84,9 +84,15 @@ system("$browserCmd \"https://targetonline.sharepoint.com/sites/insideTGT\"");
 # Get how many days to fetch
 my $numDays = (scalar(@ARGV)>0 && $ARGV[0] < 0)?($ARGV[0]):0;
 
-# Do this for the desired number of days.
+
+
+
+# Do this for the desired number of days - begin while loop:
 for (my $curDay = $numDays; $curDay <= 0; $curDay++)
 {
+
+
+
 
 # Open the processing files
 my $tmpfile = "tmp.html";
@@ -101,6 +107,9 @@ my $date = (scalar(@ARGV)>0 && $ARGV[0] < 0)?
 my $altDate = (scalar(@ARGV)>0 && $ARGV[0] < 0)?
 	strftime "%Y-%m-%d", localtime((time + $curDay*86400)):
 	(scalar(@ARGV)>0)?$ARGV[0]:strftime "%Y-%m-%d", localtime;
+my $day = substr($date,6);
+my $month = substr($date,4,2);
+my $year = substr($date,0,4);
 
 # Other variables
 my $imageName;
@@ -109,6 +118,13 @@ my $response;
 
 # Begin the OUT file
 print OUT "<HTML><body>";
+
+###############################################################################
+# The Far Side
+################################################################################
+# The Far Side - special treatment for now 
+my $url = "http:\/\/thefarside.com\/".$year."\/".$month."\/".$day;
+system("$browserCmd \"$url\"");
 
 ################################################################################
 # Dilbert Version 3.0 (to fix the new reformat)
@@ -364,7 +380,14 @@ system("$browserCmd $htmlfile");
 
 # Pauses no longer needed
 #sleep(1);
+
+
+
+# End of while loop
 }
+
+
+
 
 # Check Woot, BeDeal and slickdeals...
 system("$browserCmd http://woot.com");
