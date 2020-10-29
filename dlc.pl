@@ -62,6 +62,18 @@
 #		
 #		$ sudo perl -MCPAN -e 'install Mozilla::CA'
 #
+# TPM 10/29/20
+#
+# NOTE: UserAgent::Determined started doing hostname validations on Catailina (v5.18.4)
+#
+#	https://stackoverflow.com/questions/25000331/lwpuseragent-insists-on-verifying-hostname
+#
+#	So I changed the browse command to suppress it:
+#
+#		my $browser = LWP::UserAgent::Determined->new( ssl_opts => { verify_hostname => 0, },);
+#
+#	There are more options there if you ever need to suppress ssl connections
+#			
 
 use strict;
 use POSIX qw(strftime);
@@ -113,7 +125,8 @@ my $year = substr($date,0,4);
 
 # Other variables
 my $imageName;
-my $browser = LWP::UserAgent::Determined->new;
+# Suppress hostname validation
+my $browser = LWP::UserAgent::Determined->new( ssl_opts => { verify_hostname => 0, },);
 my $response;
 
 # Begin the OUT file
@@ -203,15 +216,8 @@ while (<IN>)
 # Append to the target file
 print OUT "<img src=\"$url\"><p>\n";
 
-# Old way (breaks on Sunday)
-#my $day = substr($date,2);
-#my $year = substr($date,0,4);
-
-#print "Getting Calvin and Hobbes...\n";
-#$url = "http:\/\/images.ucomics.com\/comics\/ch\/$year\/ch$day.gif";
-
-# Append to the target file
-#print OUT "<img src=\"$url\"><p>\n";
+# TPM If the file parse didn't work, just open the original url in it's own tab
+#system("$browserCmd $url");
 
 ################################################################################
 # Garfield
@@ -252,15 +258,8 @@ while (<IN>)
 # Append to the target file
 print OUT "<img src=\"$url\"><p>\n";
 
-# Old way (breaks on Sunday)
-#my $day = substr($date,2);
-#my $year = substr($date,0,4);
-
-#print "Getting Garfield...\n";
-#$url = "http:\/\/images.ucomics.com\/comics\/ga\/$year\/ga$day.gif";
-
-# Append to the target file
-#print OUT "<img src=\"$url\"><p>\n";
+# TPM If the file parse didn't work, just open the original url in it's own tab
+#system("$browserCmd $url");
 
 ################################################################################
 # User Friendly
