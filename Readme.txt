@@ -42,3 +42,11 @@ Setting up my new mac, I needed to do all this again.  As before I skipped the o
 
 Back in business!!
 
+
+TPM 3/16/23
+
+18 years, and woke bombed.
+
+Well, it seems Adams has finally gone too far and was cancelled by the woke mob.  His distributor, GoComics, dropped
+him, and now my script won't pull him any more.  To make matters worse, Target's woke web filter is blocking the
+replacement.  So stupid.  Corporate thought police.  Time for a rewrite.

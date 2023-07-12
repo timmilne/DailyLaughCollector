@@ -142,40 +142,40 @@ system("$browserCmd \"$url\"");
 ################################################################################
 # Dilbert Version 3.0 (to fix the new reformat)
 ################################################################################
-print OUT "<strong><font face=\"arial\">Dilbert</strong><br>";
-
-# Grab the website
-my $url = "http:\/\/dilbert.com\/strip\/".$altDate;
-
-print "Getting Dilbert...\n";
-# TPM This worked pretty slick, sending the response straight to a content file
-# Alas, the bug remained, and the response is truncated...
-#$response = $browser->get($url);
-$response = $browser->get($url,":content_file"=>$tmpfile);
-die $response->error_as_HTML if (!$response->is_success);
-
-# Reopen the file for reading
-open (IN, "$tmpfile") || die "Can't open: $tmpfile";
-
-while (<IN>)
-{
-  # Is this a line we are interested in?
-  next if (!/amuniversal/);
-
-  # Strip off the beginnings and endings
-  s/^.*http/http/;
-  s/\".*//;
-
-  #Save the url
-  $url = $_;
-  last;
-}
-
-# Append to the target file
-print OUT "<img src=\"$url\"><p>\n";
-
-# TPM If the file parse didn't work, just open the original url in it's own tab
-#system("$browserCmd $url");
+#print OUT "<strong><font face=\"arial\">Dilbert</strong><br>";
+#
+## Grab the website
+#my $url = "http:\/\/dilbert.com\/strip\/".$altDate;
+#
+#print "Getting Dilbert...\n";
+## TPM This worked pretty slick, sending the response straight to a content file
+## Alas, the bug remained, and the response is truncated...
+##$response = $browser->get($url);
+#$response = $browser->get($url,":content_file"=>$tmpfile);
+#die $response->error_as_HTML if (!$response->is_success);
+#
+## Reopen the file for reading
+#open (IN, "$tmpfile") || die "Can't open: $tmpfile";
+#
+#while (<IN>)
+#{
+## Is this a line we are interested in?
+#  next if (!/amuniversal/);
+#
+#  # Strip off the beginnings and endings
+#  s/^.*http/http/;
+#  s/\".*//;
+#
+#  #Save the url
+#  $url = $_;
+#  last;
+#}
+#
+## Append to the target file
+#print OUT "<img src=\"$url\"><p>\n";
+#
+## TPM If the file parse didn't work, just open the original url in it's own tab
+##system("$browserCmd $url");
 
 ################################################################################
 # Calvin and Hobbes
