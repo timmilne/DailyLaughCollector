@@ -187,7 +187,7 @@ my $month = substr($date,4,2);
 my $year = substr($date,0,4);
 
 # Grab the website
-my $url = "http:\/\/www.gocomics.com\/calvinandhobbes\/".$year."\/".$month."\/".$day;
+my $url = "https:\/\/gocomics.com\/calvinandhobbes\/".$year."\/".$month."\/".$day;
 
 print "Getting Calvin and Hobbes...\n";
 # TPM This worked pretty slick, sending the response straight to a content file
@@ -202,10 +202,10 @@ open (IN, "$tmpfile") || die "Can't open: $tmpfile";
 while (<IN>)
 {
   # Is this a line we are interested in?
-  next if (!/assets.amuniversal/);
+  next if (!/featureassets.gocomics.com/);
 
   # Strip off the beginnings and endings
-  s/^.*http/http/;
+  s/^.*https/https/;
   s/\".*//;
 
   #Save the url
@@ -229,7 +229,7 @@ my $month = substr($date,4,2);
 my $year = substr($date,0,4);
 
 # Grab the website
-my $url = "http:\/\/www.gocomics.com\/garfield\/".$year."\/".$month."\/".$day;
+my $url = "https:\/\/gocomics.com\/garfield\/".$year."\/".$month."\/".$day;
 
 print "Getting Garfield...\n";
 # TPM This worked pretty slick, sending the response straight to a content file
@@ -244,10 +244,10 @@ open (IN, "$tmpfile") || die "Can't open: $tmpfile";
 while (<IN>)
 {
   # Is this a line we are interested in?
-  next if (!/assets.amuniversal/);
+  next if (!/featureassets.gocomics.com/);
 
   # Strip off the beginnings and endings
-  s/^.*http/http/;
+  s/^.*https/https/;
   s/\".*//;
 
   #Save the url
